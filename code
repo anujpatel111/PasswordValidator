@@ -1,0 +1,42 @@
+public class PasswordValidator {
+    public static boolean isPasswordValid(String password) {
+        // Check the length requirement
+        if (password.length() < 8 || password.length() > 16) {
+            return false;
+        }
+
+        // Define regular expressions for each category
+        String lowercaseRegex = ".*[a-z].*";
+        String uppercaseRegex = ".*[A-Z].*";
+        String numbersRegex = ".*\\d.*";
+        String specialSymbolsRegex = ".*[~!@#$%^&*()\\-=+_].*";
+
+        int categoryCount = 0;
+
+        // Check each category
+        if (password.matches(lowercaseRegex)) {
+            categoryCount++;
+        }
+        if (password.matches(uppercaseRegex)) {
+            categoryCount++;
+        }
+        if (password.matches(numbersRegex)) {
+            categoryCount++;
+        }
+        if (password.matches(specialSymbolsRegex)) {
+            categoryCount++;
+        }
+
+        // Check if at least three categories are satisfied
+        return categoryCount >= 3;
+    }
+
+    public static void main(String[] args) {
+        String password = "Abc@123";
+        if (isPasswordValid(password)) {
+            System.out.println("Password valid.");
+        } else {
+            System.out.println("Password invalid.");
+        }
+    }
+}
